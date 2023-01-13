@@ -14,7 +14,7 @@ const ShowListPage: FC<showListPAgeProps> = ({ query, shows, queryChange, loadin
   return (
     <>
       <div className="space-y-2">
-        <h1 className="text-center text-xl">Search your favorite shows...</h1>
+        <h1 className="text-center text-xl">Search your favourite tv shows...</h1>
         <div className="flex flex-col"><SearchBar value={query} onChange={(event) => { queryChange(event.target.value); }} />
           {loading && <Loading />}
         </div>
