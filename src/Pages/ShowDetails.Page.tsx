@@ -45,7 +45,7 @@ const ShowDetailPage: FC<ShowDetailPageProps> = ({ params, show, cast, showIdCha
           </div>
           <div className="flex rounded-md h-4/5 w-full flex-col bg-white/20 glass2 p-2 lg:h-3/5 lg:w-4/5 lg:flex-row lg:space-x-4">
             <img className="h-64 rounded-md w-full lg:h-72 lg:w-1/3" src={show.image?.medium || "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="} />
-            <div className="flex flex-col space-y-2 lg:w-1/2">
+            <div className="flex flex-col lg:h-72 overflow-y-scroll px-2 space-y-2 lg:w-1/2">
               <p className="text-thin text-justify lg:text-2xl">{show.summary}</p>
               <h1 className="w-16 rounded bg-lime-200 p-2 text-center font-bold">{show.rating.average}/10</h1>
             </div>
