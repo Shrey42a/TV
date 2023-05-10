@@ -6,18 +6,15 @@ import CastCard from "../Components/CastCard";
 import GenrePill from "../Components/GenrePill";
 import withRouter, { WithRouterProps } from "../hocs/withRouter";
 import Loading from "../Loading";
-import { Cast } from "../models/casts";
 import { CastSelector } from "../selectors/CastSelector";
 import { showsMapSelector } from "../selectors/ShowsSelector";
 import { State } from "../store";
 
-type OwnProps = { cast: Cast[]; showIdChange: (id: number) => void; } & WithRouterProps;
+type OwnProps = WithRouterProps;
 
 type ShowDetailPageProps = ReduxProps & OwnProps;
 
 const ShowDetailPage: FC<ShowDetailPageProps> = ({ params, show, cast, showIdChange }) => {
-  console.log("id", params.showId);
-  console.log("cast", cast);
 
   const id = +params.showId;
   useEffect(() => {
@@ -36,18 +33,18 @@ const ShowDetailPage: FC<ShowDetailPageProps> = ({ params, show, cast, showIdCha
         </div>
         <div className="flex h-max w-full flex-col items-center space-y-1 p-2 py-1">
           <div className="w-full flex flex-col bg-white/30 rounded-md p-2 lg:w-4/5">
-            <h1 className="font-semibold text-lg uppercase text-gray-600">{show.name}</h1>
+            <h1 className="font-semibold text-lg uppercase text-gray-600">{show?.name}</h1>
             <div className="flex space-x-1">
-              {show.genres.map((genere: string) => (
+              {show.genres?.map((genere: string) => (
                 <GenrePill name={genere} key={genere} />
               ))}
             </div>
           </div>
           <div className="flex rounded-md h-4/5 w-full flex-col bg-white/20 glass2 p-2 lg:h-3/5 lg:w-4/5 lg:flex-row lg:space-x-4">
-            <img className="h-64 rounded-md w-full lg:h-72 lg:w-1/3" src={show.image?.medium || "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="} />
+            <img className="h-64 rounded-md w-full lg:h-72 lg:w-1/3" src={show?.image?.medium || "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="} />
             <div className="flex flex-col lg:h-72 overflow-y-scroll px-2 space-y-2 lg:w-1/2">
-              <p className="text-thin text-justify lg:text-2xl">{show.summary}</p>
-              <h1 className="w-16 rounded bg-lime-200 p-2 text-center font-bold">{show.rating.average}/10</h1>
+              <p className="text-thin text-justify lg:text-2xl">{show?.summary}</p>
+              <h1 className="w-16 rounded bg-lime-200 p-2 text-center font-bold">{show.rating?.average}/10</h1>
             </div>
           </div>
           <div className="w-full rounded-md bg-white/30 p-2 lg:w-4/5">
@@ -55,7 +52,7 @@ const ShowDetailPage: FC<ShowDetailPageProps> = ({ params, show, cast, showIdCha
           </div>
           <div className="flex h-max py-6 gap-6 w-full glass2 rounded-md flex-wrap lg:justify-between justify-center bg-white/20 px-6 lg:w-4/5">
             {cast.map((a) => (
-              <CastCard cast={a}></CastCard>
+              <CastCard key={a.id} cast={a}></CastCard>
             ))}
           </div>
         </div>

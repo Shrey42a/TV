@@ -10,7 +10,7 @@ import Loading from "../Loading";
 type showListPAgeProps = ReduxProps;
 
 const ShowListPage: FC<showListPAgeProps> = ({ query, shows, queryChange, loading }) => {
-
+  console.log("shows", shows);
   return (
     <>
       <div className="space-y-2">
@@ -19,8 +19,8 @@ const ShowListPage: FC<showListPAgeProps> = ({ query, shows, queryChange, loadin
           {loading && <Loading />}
         </div>
         <div className="flex flex-wrap justify-center">
-          {shows.map((s) => (
-            <ShowCard key={s.id} show={s}></ShowCard>
+          {shows && shows.map((s: any) => (
+            <ShowCard key={s.id} show={s?.show} cast={s.cast}></ShowCard>
           ))}
         </div>
       </div>

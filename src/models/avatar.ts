@@ -1,8 +1,8 @@
-export type Cast = {
+export type Avtar = {
+    id: number;
+    name: string;
     image?: {
         medium: string;
         original: string;
     };
-    name: string;
-    id: number;
-};
+}

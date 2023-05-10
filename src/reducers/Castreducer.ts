@@ -23,7 +23,18 @@ function CastReducer(state = initialState, action: AnyAction): State {
                 const normalizedData = normalize(casts, [castSchema]);
                 draft.cast = normalizedData.entities.shows || {};
             });
+        // case SHOWS_LOADED:
+        //   return produce(state, (draft) => {
+        //     const cast1 = action.payload as Cast[]
+        //     if (!cast1 || cast1.length === 0) {
+        //       return;
+        //     }
+        //     const castArray = cast1.map((item: any) => item.Cast)
+        //     const castEntity = new schema.Entity("cast");
+        //     const normalizeData = normalize(castArray, [castEntity])
+        //     draft.cast = normalizeData.entities.cast!
 
+        //   })
         default:
             return state;
     }

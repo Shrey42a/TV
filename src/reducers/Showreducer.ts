@@ -1,5 +1,4 @@
 import { produce } from "immer";
-import { schema, normalize } from "normalizr";
 import { AnyAction } from "redux";
 import { } from "../actions";
 import { SHOWS_DETAIL_LOADED, SHOWS_LOADED, SHOWS_QUERY_CHANGED } from "../actions/Showsaction";
@@ -21,25 +20,39 @@ export const initialState: State = {
     loading: false,
 };
 
+const normaliseData = (data) => {
+    let obj = {};
+    let result = [];
+    data.forEach((shows) => {
+        obj[shows.show.id] = shows;
+        result.push(shows.show.id);
+    })
+    return { obj, result };
+};
+
 function ShowReducer(state = initialState, action: AnyAction): State {
     switch (action.type) {
         case SHOWS_LOADED:
             return produce(state, (draft) => {
-                const shows = action.payload as Show[];
-
+                const shows = action.payload as Show[]
                 if (!shows || shows.length === 0) {
                     return;
                 }
+                // const showSchema = new schema.Entity("shows");
+                // const normalizedData = normalize(shows, [showSchema]);
+                const normalizedData = normaliseData(shows)
 
-                const showSchema = new schema.Entity("shows");
-                const normalizedData = normalize(shows, [showSchema]);
+                console.log("normalizedData", normalizedData)
+
                 draft.loading = false;
                 draft.query_shows[draft.query] = normalizedData.result;
-                draft.shows = { ...draft.shows, ...normalizedData.entities.shows };
+                //        // draft.shows = { ...draft.shows, ...normalizedData.entities.shows };
+                draft.shows = { ...draft.shows, ...normalizedData.obj };
+
             });
         case SHOWS_QUERY_CHANGED:
             return produce(state, (draft) => {
-                draft.query = action.payload;
+                draft.query = action.payload as string;
                 draft.loading = true;
             })
         case SHOWS_DETAIL_LOADED:

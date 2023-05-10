@@ -13,4 +13,4 @@ export const queryMapSelector = createSelector(showsStateSelector, (showsState) 
 
 export const showSingleMapSelector = createSelector(showsStateSelector, (showState) => showState.shows);
 
-export const showsSelector = createSelector(showsMapSelector, showsQuerySelector, queryMapSelector, (showsMap, query, queryShowsMap) => queryShowsMap[query] ? queryShowsMap[query].map((showId) => showsMap[showId]) : []);
+export const showsSelector = createSelector(showsMapSelector, showsQuerySelector, queryMapSelector, (showsMap, query, queryShowsMap) => queryShowsMap[query]? queryShowsMap[query].map((showId) => showsMap[showId]) : []);
